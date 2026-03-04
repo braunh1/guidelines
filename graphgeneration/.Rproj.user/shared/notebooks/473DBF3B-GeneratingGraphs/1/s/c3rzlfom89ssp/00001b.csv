@@ -1,0 +1,8 @@
+"0",""
+"0","# Moves legend outside the plot to right margin"
+"0","legend(""topright"","
+"0","       inset = c(-0.25, 0),   # negative inset pushes it outside graph"
+"0","       legend = c(""Pair A"", ""Pair B""),    #legend titles - CHANGE"
+"0","       col = c(""darkmagenta"", ""deeppink""),"
+"0","       pch = c(16, 17),"
+"0","       lwd = 2)"

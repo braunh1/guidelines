@@ -1,0 +1,7 @@
+"0",""
+"0",""
+"0","# X-axis"
+"0","axis(1,"
+"0","     at = c(0.5, 2.5),          # positions of the 2 ticks"
+"0","     labels = c(""year 2018"", ""year 2020"") # labels - CHANGE"
+"0",")"

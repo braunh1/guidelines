@@ -1,0 +1,242 @@
+---
+title: "GeneratingGraphs"
+author: "Halle Braun"
+format: html
+editor: visual
+---
+
+```{r}
+rm(list = ls())
+
+#list of packages
+packages <- c("corrr", "ggplot2", "grid", "png", "cowplot",  "ggimage", "dplyr", "tidyverse", "knitr", "readxl", "writexl", "tidytext", "ggrepel", "stringr", "jsonlite")
+```
+
+```{r}
+
+#code to install necessary packages
+install_and_load_packages <- function(packages) {
+  for(package in packages) {
+    if(!require(package, character.only = TRUE)) {
+      install.packages(package, dependencies = TRUE)
+      library(package, character.only = TRUE)
+    }
+  }
+}
+
+# Call the function with the list of packages
+install_and_load_packages(packages)
+```
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+```{r}
+
+
+
+
+```
+
+**Non-Connected Categories Plots**
+
+```{r}
+
+# Expands right margin for legend space
+par(mar = c(5, 4, 4, 8), xpd = TRUE)
+
+# Pair 1 - CHANGE VALUES
+xA <- c(1, 2)
+yA <- c(5, 7)
+
+# Pair 2 - CHANGE VALUES 
+xB <- c(1, 2)
+yB <- c(3, 5)
+
+# Plots pair A
+plot(xA, yA,
+     col = "darkmagenta", pch = 16,
+     xlab = "X", ylab = "Y",  # x and y axis labels - CHANGE
+     xlim = c(0, 3),          # x-axis range - CHANGE 
+     ylim = c(2, 8),          # y-axis range - CHANGE
+     xaxt = "n", yaxt = "n")  # turn off default axes
+
+# axis marks and sequence of marks
+axis(1, at = seq(0, 3, by = 1))     # x-axis ticks - CHANGE seq TO MATCH xlim
+axis(2, at = seq(2, 8, by = 2))    # y-axis ticks - CHANGE seq TO MATCH ylim
+
+# Adds pair B
+points(xB, yB, col = "deeppink", pch = 17)
+
+# Moves legend outside the plot to right margin
+legend("topright",
+       inset = c(-0.25, 0),   # negative inset pushes it outside graph
+       legend = c("Pair A", "Pair B"),    #legend titles - CHANGE
+       col = c("darkmagenta", "deeppink"),
+       pch = c(16, 17),
+       lwd = 2)
+
+
+```
+
+**Connected Categories Plots**
+
+```{r}
+
+# Expands right margin for legend space
+par(mar = c(5, 4, 4, 8), xpd = TRUE)
+
+# Pair 1 - CHANGE VALUES
+xA <- c(1, 2)
+yA <- c(5, 7)
+
+# Pair 2 - CHANGE VALUES 
+xB <- c(1, 2)
+yB <- c(3, 5)
+
+# Plots pair A
+plot(xA, yA,
+     col = "darkmagenta", pch = 16,
+     xlab = "X", ylab = "Y",  # x and y axis labels - CHANGE
+     xlim = c(0, 3),          # x-axis range - CHANGE 
+     ylim = c(2, 8),          # y-axis range - CHANGE
+     xaxt = "n", yaxt = "n")  # turn off default axes
+
+# axis marks and sequence of marks
+axis(1, at = seq(0, 3, by = 1))     # x-axis ticks - CHANGE seq TO MATCH xlim
+axis(2, at = seq(2, 8, by = 2))    # y-axis ticks - CHANGE seq TO MATCH ylim
+
+# Adds pair B
+points(xB, yB, col = "deeppink", pch = 17)
+
+# Connects pairs with a line
+lines(xA, yA, col = "darkmagenta", lwd = 2)
+lines(xB, yB, col = "deeppink", lwd = 2)
+
+# Moves legend outside the plot to right margin
+legend("topright",
+       inset = c(-0.25, 0),   # negative inset pushes it outside graph
+       legend = c("Pair A", "Pair B"),    #legend titles - CHANGE
+       col = c("darkmagenta", "deeppink"),
+       pch = c(16, 17),
+       lwd = 2)
+
+
+```
+
+```{r}
+#### --- MAIN PLOT REGION --- ####
+# This region occupies the top ~75% of the device
+par(fig = c(0, 1, 0.25, 1),        # left, right, bottom, top (fractions of device)
+    mar = c(5, 4, 4, 2))           # normal margins for the plot
+
+# Pair 1 - CHANGE VALUES
+xA <- c(1, 2)
+yA <- c(5, 7)
+
+# Pair 2 - CHANGE VALUES
+xB <- c(1, 2)
+yB <- c(3, 5)
+
+# Plot Pair A
+plot(xA, yA,
+     col = "darkmagenta", pch = 16,
+     xlab = "X", ylab = "Y",
+     xlim = c(0, 3),
+     ylim = c(0, 10),
+     xaxt = "n", yaxt = "n")
+
+axis(1, at = seq(0, 3, by = 1))
+axis(2, at = seq(0, 10, by = 1))
+
+# Add Pair B
+points(xB, yB, col = "deeppink", pch = 17)
+
+# Optional: connect points
+lines(xA, yA, col = "darkmagenta", lwd = 2)
+lines(xB, yB, col = "deeppink", lwd = 2)
+
+
+#### --- LEGEND REGION --- ####
+# New region occupying the bottom 25% of the device
+par(fig = c(0, 1, 0, 0.25),        # full width, bottom quarter
+    mar = c(0, 4, 0, 2),           # minimal margins
+    new = TRUE)
+
+plot.new()                         # blank canvas for legend
+
+legend("topright",
+       legend = c("egg incubation", "spawning temperature"),
+       col = c("darkmagenta", "deeppink"),
+       pch = c(16, 17),
+       lwd = 2,
+       horiz = TRUE,
+       bty = "n")                  # remove legend box if desired
+```
+
+# 
+
+testing stuff
+
+```{r}
+# Open a PNG device
+#png("employment_plot.png", width = 1400, height = 900, res = 150)
+
+# Expands right margin for legend space
+par(mar = c(5, 4, 4, 9), xpd = TRUE)
+
+# Pair 1 - CHANGE VALUES
+xA <- c(0.5, 2.5)
+yA <- c(5, 7)
+
+# Pair 2 - CHANGE VALUES 
+xB <- c(0.5, 2.5)
+yB <- c(3, 5)
+
+# Plot Pair A
+plot(xA, yA,
+     col = "darkmagenta", pch = 16,
+     xlab = "Rate of Employment", ylab = "Percentage",
+     xlim = c(0, 3),
+     ylim = c(2, 8),
+     xaxt = "n", yaxt = "n")   # turn off default axes
+
+
+# X-axis
+axis(1,
+     at = c(0.5, 2.5),          # positions of the 2 ticks
+     labels = c("year 2018", "year 2020") # labels - CHANGE
+)
+
+# Y-axis
+axis(2, at = seq(2, 8, by = 2))
+
+# Adds pair B
+points(xB, yB, col = "deeppink", pch = 17)
+
+# connecting lines
+lines(xA, yA, col = "darkmagenta", lwd = 2)
+lines(xB, yB, col = "deeppink", lwd = 2)
+
+# Moves legend outside the plot to right margin
+legend("topright",
+       inset = c(-0.25, 0),
+       legend = c("U.S.\nemployment\n", "Canada\nemployment"),
+       col = c("darkmagenta", "deeppink"),
+       pch = c(16, 17),
+       lwd = 2,
+       bty = "n")
+
+# Close the PNG device
+#dev.off()
+
+```
+
+```{r}
+
+```

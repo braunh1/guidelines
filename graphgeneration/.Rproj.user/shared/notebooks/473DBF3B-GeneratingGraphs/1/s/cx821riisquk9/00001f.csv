@@ -1,0 +1,8 @@
+"0",""
+"0","legend(""topright"","
+"0","       legend = c(""egg incubation"", ""spawning temperature""),"
+"0","       col = c(""darkmagenta"", ""deeppink""),"
+"0","       pch = c(16, 17),"
+"0","       lwd = 2,"
+"0","       horiz = TRUE,"
+"0","       bty = ""n"")                  # remove legend box if desired"

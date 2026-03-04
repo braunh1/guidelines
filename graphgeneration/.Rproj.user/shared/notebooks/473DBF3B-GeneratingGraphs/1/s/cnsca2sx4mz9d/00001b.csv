@@ -1,0 +1,7 @@
+"0",""
+"0",""
+"0","#### --- LEGEND REGION --- ####"
+"0","# New region occupying the bottom 25% of the device"
+"0","par(fig = c(0, 1, 0, 0.25),        # full width, bottom quarter"
+"0","    mar = c(0, 4, 0, 2),           # minimal margins"
+"0","    new = TRUE)"
